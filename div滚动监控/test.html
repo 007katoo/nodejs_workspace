@@ -1,0 +1,61 @@
+<body>
+<style>
+  .parent {
+    height: 100px;
+    width: 100px;
+    overflow: scroll;
+    background: red;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+  }
+
+  .child {
+    height: 200%;
+    width: 200%;
+    background: blue;
+  }
+
+  .msg {
+    position: absolute;
+    top: 370px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+  }
+</style>
+<div></div>
+<div class="parent">
+  <div class="child"></div>
+</div>
+<div class="msg">
+  <div class="msg1"></div>
+  <div class="msg2"></div>
+</div>
+
+<script>
+  var parent = document.querySelector('.parent')
+  var child = document.querySelector('.child')
+  var msg1 = document.querySelector('.msg1')
+  var msg2 = document.querySelector('.msg2')
+
+  parent.scrollTop = 1000
+  parent.scrollLeft = 1000
+
+  var eventCount = 0
+  function log () {
+    msg1.innerText = `scrollTop: ${parent.scrollTop}, scrollLeft: ${parent.scrollLeft}`
+    msg2.innerText = `${eventCount} scroll event${eventCount > 1 ? 's were' : ' was'} triggered`
+  }
+
+  log()
+
+  parent.addEventListener('scroll', () => {
+    eventCount += 1
+    log()
+  })
+</script>
+</body>

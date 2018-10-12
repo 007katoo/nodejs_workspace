@@ -1,4 +1,4 @@
-import { fromEvent } from 'rxjs';
+import { fromEvent,Observable } from 'rxjs';
 
 const el = document.getElementById('my-element');
 
@@ -16,3 +16,5 @@ const subscription = mouseMoves.subscribe((evt:MouseEvent) => {
     subscription.unsubscribe();
   }
 });
+
+Observable.create()

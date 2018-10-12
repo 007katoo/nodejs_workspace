@@ -1,2 +1,3 @@
-var str = "test/test1/test2"
-console.log(str.replace("/","_"));
+
+console.log(require('dotenv').config());
+console.log(process.env);

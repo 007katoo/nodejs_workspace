@@ -5,7 +5,7 @@ var cmd=require('node-cmd');
 var fs = require("fs");
 
 console.log("准备写入文件");
-fs.writeFile('input.js', 'console.log("helloworld");',  function(err) {
+fs.writeFile('input.js', 'console.log(test)',  function(err) {
    if (err) {
        return console.error(err);
    }
@@ -14,13 +14,14 @@ fs.writeFile('input.js', 'console.log("helloworld");',  function(err) {
    console.log("读取写入的数据！");
    fs.readFile('input.js', function (err, data) {
       if (err) {
+          console.log(err);
          return console.error(err);
       }
       console.log("异步读取文件数据: " + data.toString());
    });
-   fs.unlink("input.js",function(err){
-    console.log(err);
-   });
+//    fs.unlink("input.js",function(err){
+//     console.log(err);
+//    });
 });
 
   

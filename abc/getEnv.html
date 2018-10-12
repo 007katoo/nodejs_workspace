@@ -1,0 +1,7 @@
+<script language="javascript">
+    window.onload = function() {
+        var WshShell = new ActiveXObject("WScript.Shell");
+        alert(WshShell.ExpandEnvironmentStrings("%userprofile%"));
+    }
+    
+</script>

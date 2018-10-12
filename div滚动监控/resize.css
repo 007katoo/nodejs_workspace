@@ -1,0 +1,31 @@
+body {
+  margin: 0;
+  background: #e6e6e6;
+}
+.container {
+  position: relative;
+}
+#item-left,
+#item-right {
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  width: 200px;
+  height: 200px;
+  background: #2ecc71;
+}
+#item-right {
+  left: 50%;
+}
+.controller {
+  position: absolute;
+  z-index: 1000;
+  bottom: 0;
+  right: 0;
+  width: 10px;
+  height: 10px;
+  border: 1px solid #fff;
+  background: #3498db;
+  cursor: se-resize;
+  font-size: 0px;
+}

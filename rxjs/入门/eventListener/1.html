@@ -1,0 +1,257 @@
+<!-- <script src="../rxjs.umd.min.js"></script> -->
+<script src="../rxjs.umd.js"></script>
+<script>
+    
+    // var button = document.querySelector('button');
+    // Rx.Observable.fromEvent(button, 'click').subscribe(() => console.log('Clicked!'));
+    var operators = rxjs.operators;
+    window.onload = function () {
+
+        var button = document.querySelector('button');
+        var clicks = rxjs.fromEvent(button,'click');
+        // rxjs.fromEvent(button, 'click').pipe(
+        //     operators.scan((count,index) => count + 1, 0)
+
+        // ).subscribe(count => 
+        //     console.log(`Clicked ${count} times`)
+        // )
+        // parseInt
+        // const ones = clicks.pipe(operators.mapTo({value:5,index:0}));
+        // const seed = 0;
+        // const count = ones.pipe(operators.scan((acc, one, index) => {
+        //     return {value:acc.value + one.value,index:index}}, {value:0,index:0}));
+        // count.subscribe(x => console.log(x));
+        
+        // clicks.pipe(
+        //     operators.throttleTime(1000),
+        //     operators.map(event =>event.clientX),
+        //     operators.scan((accr,click)=> accr+click,0),
+        // ).subscribe(
+        //     count => console.log(count)
+        // )
+        
+        // const source = rxjs.concat(rxjs.of(1),rxjs.throwError('This is an error!'));
+        // // 优雅地处理错误，并返回带有错误信息的 observable
+        // const example = source.pipe(
+        //     operators.mergeMap(res => rxjs.of('test'+res)),
+        //     operators.catchError(val => rxjs.of(`I caught: ${val}`))
+        // );
+        // // 输出: 'I caught: This is an error'
+        // const subscribe = example.subscribe(val => console.log("normal",val),val => console.log("error",val));
+
+        // var observable = rxjs.Observable.create(function (observer) {
+        //     observer.next(1);
+        //     observer.next(2);
+        //     observer.next(3);
+        //     // observer.complete();
+        //     setTimeout(() => {
+        //         observer.next(4);
+        //         observer.complete();
+        //     }, 1000);
+        // });
+
+        // observable.subscribe(res => {
+        //     console.log(res);
+        // });
+
+        // var observable = rxjs.concat(rxjs.of(1,2,3),rxjs.interval(1000).pipe(operators.take(5)));
+
+        // console.log('just before subscribe');
+        // observable.subscribe({
+        //     next: x => console.log('got value ' + x),
+        //     error: err => console.error('something wrong occurred: ' + err),
+        //     complete: () => console.log('done'),
+        // });
+        // console.log('just after subscribe');
+
+
+        // var observable = rxjs.from([10, 20, 30]);
+        // var subscription = observable.subscribe(x => console.log(x));
+        // // 稍后：
+        // subscription.unsubscribe();
+
+        // var observable = rxjs.Observable.create(function test(observer) {
+        //     // 追踪 interval 资源
+        //     observer.next(1);
+        //     observer.next(2);
+        //     var intervalID = setInterval(() => {
+        //         observer.next('hi');
+        //     }, 1000);
+        //     setTimeout(() => observer.complete(),3000)
+            
+        //     // observer.error("nimabi_error");
+        //     // // 提供取消和清理 interval 资源的方法
+        //     // return function unsubscribe() {
+        //     //     clearInterval(intervalID);
+        //     //     console.log("关闭");
+        //     // };
+        // });
+        // var observer = {
+        //     next: x => console.log('Observer got a next value: ' + x),
+        //     error: err => console.error('Observer got an error: ' + err),
+        //     complete: () => console.log('Observer got a complete notification'),
+        // };
+
+        // var subscription = observable.subscribe(
+        //     observer
+        // );
+        // // subscription.unsubscribe();
+        // setTimeout(()=> subscription.unsubscribe(),2000);
+
+        // var observable1 = rxjs.interval(400);
+        // var observable2 = rxjs.interval(300);
+
+        // var subscription = observable1.subscribe(x => console.log('first: ' + x));
+        // var childSubscription = observable2.subscribe(x => console.log('second: ' + x));
+
+        // subscription.add(childSubscription);
+
+        // setTimeout(() => {
+        // // subscription 和 childSubscription 都会取消订阅
+        // subscription.unsubscribe();
+        // }, 1000);
+
+
+        // var subject = new rxjs.Subject();
+
+        // subject.subscribe({
+        //     next: (v) => console.log('subject_observerA: ' + v)
+        // });
+        // subject.subscribe({
+        //     next: (v) => console.log('subject_observerB: ' + v)
+        // });
+        // subject.next(1);
+        // subject.next(2);
+
+
+        // var observable = rxjs.Observable.create(function(observer) {
+        //     observer.next(1);
+        //     observer.next(2);
+        // })
+
+        // observable.subscribe((v) => console.log('observerA: ' + v));
+        // observable.subscribe((v) => console.log('observerB: ' + v));
+
+
+        // var subject = new rxjs.Subject();
+
+        // subject.subscribe({
+        // next: (v) => console.log('observerA: ' + v)
+        // });
+        // subject.subscribe({
+        // next: (v) => setTimeout(() =>console.log('observerB: ' + v),2000)
+        // });
+
+        // var observable = rxjs.from([1, 2, 3]);
+
+        // observable.subscribe(subject); // 你可以提供一个 Subject 进行订阅
+
+        
+        // var source = rxjs.from([1, 2, 3]);
+        // var subject = new rxjs.Subject();
+        // var multicasted = source.pipe(operators.multicast(subject));
+
+        // // 在底层使用了 `subject.subscribe({...})`:
+        // multicasted.subscribe({
+        // next: (v) => console.log('observerA: ' + v)
+        // });
+        // multicasted.subscribe({
+        // next: (v) => console.log('observerB: ' + v)
+        // });
+
+        // // 在底层使用了 `source.subscribe(subject)`:
+        // multicasted.connect();
+
+        // var source = rxjs.interval(500);
+        // var subject = new rxjs.Subject();
+        // var multicasted = source.pipe(operators.multicast(subject));
+        // var subscription1, subscription2, subscriptionConnect;
+
+        // subscription1 = multicasted.subscribe({
+        //  next: (v) => console.log('observerA: ' + v)
+        // });
+        // // 这里我们应该调用 `connect()`，因为 `multicasted` 的第一个
+        // // 订阅者关心消费值
+        // subscriptionConnect = multicasted.connect();
+
+        // setTimeout(() => {
+        //     subscription2 = multicasted.subscribe({
+        //         next: (v) => console.log('observerB: ' + v)
+        //     });
+        // }, 600);
+
+        // setTimeout(() => {
+        //     subscription1.unsubscribe();
+        // }, 1200);
+
+        // // 这里我们应该取消共享的 Observable 执行的订阅，
+        // // 因为此后 `multicasted` 将不再有订阅者
+        // setTimeout(() => {
+        //     subscription2.unsubscribe();
+        //     subscriptionConnect.unsubscribe(); // 用于共享的 Observable 执行
+        // }, 2000);
+
+
+        // var source = rxjs.interval(500);
+        // var subject = new rxjs.Subject();
+        // var refCounted = source.pipe(
+        //     operators.multicast(subject),
+        //     // operators.refCount()
+        // );
+        // var subscription1, subscription2, subscriptionConnect;
+        // refCounted.connect();
+        // // 这里其实调用了 `connect()`，
+        // // 因为 `refCounted` 有了第一个订阅者
+        // console.log('observerA subscribed');
+        // subscription1 = refCounted.subscribe({
+        //     next: (v) => console.log('observerA: ' + v)
+        // });
+
+        // setTimeout(() => {
+        //     console.log('observerB subscribed');
+        //     subscription2 = refCounted.subscribe({
+        //         next: (v) => console.log('observerB: ' + v)
+        //     });
+        // }, 600);
+
+        // setTimeout(() => {
+        //     console.log('observerA unsubscribed');
+        //     subscription1.unsubscribe();
+        // }, 1200);
+
+        // // 这里共享的 Observable 执行会停止，
+        // // 因为此后 `refCounted` 将不再有订阅者
+        // setTimeout(() => {
+        //     console.log('observerB unsubscribed');
+        //     subscription2.unsubscribe();
+        // }, 2000);
+
+        var subject = new rxjs.ReplaySubject(3); // 为新的订阅者缓冲3个值
+
+        subject.subscribe({
+            next: (v) => console.log('observerA: ' + v)
+        });
+
+        subject.next(setTimeout(() => {
+            return 1
+        },1000));
+        subject.next(setTimeout(() => {
+            return 2
+        },1000));
+        subject.next(setTimeout(() => {
+            return 3
+        },1000));
+        subject.next(setTimeout(() => {
+            return 4
+        },1000));
+
+        subject.subscribe({
+            next: (v) => console.log('observerB: ' + v)
+        });
+
+        subject.next(5);
+    };
+        
+    
+</script>
+<button>click</button>
