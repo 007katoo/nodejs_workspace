@@ -6,8 +6,9 @@ window.onload = function () {
   var controllerRight = document.getElementById('controller-right')
 
   onelresize(left, function () {
-    right.style.width = left.offsetWidth + 'px'
-    right.style.height = left.offsetHeight + 'px'
+    // right.style.width = left.offsetWidth + 'px'
+    // right.style.height = left.offsetHeight + 'px'
+    console.log('变化了');
   })
 
   onelresize(right, function () {

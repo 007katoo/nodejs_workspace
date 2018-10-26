@@ -1,0 +1,35 @@
+<!-- <script src="../rxjs.umd.min.js"></script> -->
+<script src="../rxjs.umd.js"></script>
+<!-- <script src="../jquery-3.3.1.js"></script> -->
+<script>
+    
+    // var button = document.querySelector('button');
+    // Rx.Observable.fromEvent(button, 'click').subscribe(() => console.log('Clicked!'));
+    var operators = rxjs.operators;
+
+    // ajax函数将返回Promise对象:
+    function ajax(method, url, data) {
+        var request = new XMLHttpRequest();
+        return new Promise(function (resolve, reject) {
+            request.onreadystatechange = function () {
+                if (request.readyState === 4) {
+                    if (request.status === 200) {
+                        resolve(request.responseText);
+                    } else {
+                        reject(request.status);
+                    }
+                }
+            };
+            request.open(method, url);
+            request.send(data);
+        });
+    }
+
+    window.onload = function () {
+
+        var p = ajax('GET', 'http://localhost:4873/');
+        rxjs.from(p).subscribe(res => console.log(res));
+    };
+        
+    
+</script>

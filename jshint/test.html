@@ -1,0 +1,18 @@
+<script type="text/javascript" src="./jshint/dist/jshint.js"></script>
+
+<script>
+    var source = [
+    'function goo() {}',
+    'foo = 3;'
+    ];
+    var options = {
+    undef: true
+    };
+    var predef = {
+    foo: false
+    };
+
+    JSHINT(source, options, predef);
+
+    console.log(JSHINT.data());
+</script>

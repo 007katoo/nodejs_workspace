@@ -1,10 +1,30 @@
 <!-- <script src="../rxjs.umd.min.js"></script> -->
 <script src="../rxjs.umd.js"></script>
+<!-- <script src="../jquery-3.3.1.js"></script> -->
 <script>
     
     // var button = document.querySelector('button');
     // Rx.Observable.fromEvent(button, 'click').subscribe(() => console.log('Clicked!'));
     var operators = rxjs.operators;
+
+    // ajax函数将返回Promise对象:
+    function ajax(method, url, data) {
+        var request = new XMLHttpRequest();
+        return new Promise(function (resolve, reject) {
+            request.onreadystatechange = function () {
+                if (request.readyState === 4) {
+                    if (request.status === 200) {
+                        resolve(request.responseText);
+                    } else {
+                        reject(request.status);
+                    }
+                }
+            };
+            request.open(method, url);
+            request.send(data);
+        });
+    }
+
     window.onload = function () {
 
         var button = document.querySelector('button');
@@ -226,30 +246,38 @@
         //     subscription2.unsubscribe();
         // }, 2000);
 
-        var subject = new rxjs.ReplaySubject(3); // 为新的订阅者缓冲3个值
+        // var subject = new rxjs.ReplaySubject(3); // 为新的订阅者缓冲3个值
 
-        subject.subscribe({
-            next: (v) => console.log('observerA: ' + v)
-        });
+        // subject.subscribe({
+        //     next: (v) => console.log('observerA: ' + v)
+        // });
 
-        subject.next(setTimeout(() => {
-            return 1
-        },1000));
-        subject.next(setTimeout(() => {
-            return 2
-        },1000));
-        subject.next(setTimeout(() => {
-            return 3
-        },1000));
-        subject.next(setTimeout(() => {
-            return 4
-        },1000));
+        // subject.next(setTimeout(() => {
+        //     return 1
+        // },1000));
+        // subject.next(setTimeout(() => {
+        //     return 2
+        // },1000));
+        // subject.next(setTimeout(() => {
+        //     return 3
+        // },1000));
+        // subject.next(setTimeout(() => {
+        //     return 4
+        // },1000));
 
-        subject.subscribe({
-            next: (v) => console.log('observerB: ' + v)
-        });
+        // subject.subscribe({
+        //     next: (v) => console.log('observerB: ' + v)
+        // });
 
-        subject.next(5);
+        // subject.next(5);
+
+        // var http$ = $.get({
+        //     url:"http://www.baidu.com",
+        //     dataType:"jsonp",  //数据格式设置为jsonp
+        //     success:   function (res){console.log(res);}
+        // });
+        var p = ajax('GET', 'http://localhost:4873/');
+        rxjs.from(p).subscribe(res => console.log(res));
     };
         
     
